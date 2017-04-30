@@ -71,12 +71,7 @@ describe('Game',function(){
         game.throwBall(4);
         expect(game.results[0]).toEqual({throw1:5, throw2:5, throw3: 0, bonus:4})
       });
-      it('removes the bonus score instance after the bonus has been fully applied',function(){
-        game.throwBall(5);
-        game.throwBall(5);
-        game.throwBall(4);
-        expect(game.bonusArray.length).toEqual(0)
-      });
+
 
       it('updates the current total after a bonus has been finished',function(){
         game.throwBall(5);
@@ -193,47 +188,8 @@ describe('Game',function(){
             spyOn(game, 'isBonus').and.returnValue(false)
             expect(game.isFrameOver()).toEqual(true)
           });
-
-          // it('ends after throw 3',function(){
-          //   game.throwsLeft=1;
-          //   game.framesPlayer=9;
-          //   spyOn(game, 'isBonus').and.returnValue(false)
-          //   expect(game.isFrameOver()).toEqual(true)
-          // });
         });
       });
     });
-
-
-
-
-
   });
-  // describe('#updateFramesPlayed',function(){
-  //   beforeEach(function(){
-  //     changeFromUpdateFramesPlayed = function(){
-  //       startingNumber = game.framesPlayed;
-  //       game.updateFramesPlayed();
-  //       endingNumber = game.framesPlayed;
-  //       return endingNumber - startingNumber;
-  //     }
-  //   })
-  //   it("Doesn't increase after the first throw",function(){
-  //     change = changeFromUpdateFramesPlayed()
-  //     expect(change).toEqual(0);
-  //   });
-  //   it("Decreases after the 2nd throw",function(){
-  //     game.throwsLeft=19
-  //     change = changeFromUpdateFramesPlayed()
-  //     expect(change).toEqual(1);
-  //   });
-  //   it("Doesn't increase past 10 frames",function(){
-  //     game.throwsLeft=0
-  //     change = changeFromUpdateFramesPlayed()
-  //     expect(change).toEqual(0);
-  //   });
-  //   it("Does increase on the final throw",function(){
-  //
-  //   });
-  // });
 });

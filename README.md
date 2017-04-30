@@ -1,6 +1,6 @@
 
 22/4/2017 - Restart from scratch
-23/4/2017 - Needs some serious refactoring and class extraction, but underlying programme functional. 
+23/4/2017 - Needs some serious refactoring and class extraction, but underlying programme functional.
 
 
 Bowling Challenge

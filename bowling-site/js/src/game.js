@@ -26,14 +26,10 @@
 function Game(){
 
 
-  this.finalScore = 0;
   this.throwsLeft = 21;
   this.framesPlayed = 0;
   this.totalScore = 0;
-  // this.currentFrameScores={ throw1: 0,
-  //                           throw2:0,
-  //                           throw3:0,
-  //                           bonus:0}
+
   this.currentFrameScores=[]
   this.bonusArray=[]
   this.results=[]
@@ -65,7 +61,6 @@ function Game(){
 
         if(!this.isBonus()){
           this.updateCurrentTotal();
-          this.updateFrameTotals();
         }
         this.resetCurrentFrameScores();
         //Update frames at the end of the frame over check for correct referencing
@@ -76,38 +71,21 @@ function Game(){
 
   }
 
-  this.updateFrameTotals = function(){
-    results = this.results[this.currentFramesPlayed]
-    total = results.throw1 + results.throw1 + results.throw3 + results.bonus
-    this.frameTotals.push(total)
-  }
-
   this.incrementFrameNumber = function(){
     this.framesPlayed +=1
   }
 
   this.logFrameScores=function(){
 
-    noOfThrows = this.currentFrameScores.length
+    (this.currentFrameScores[0]) ? throw1Score = this.currentFrameScores[0] : throw1Score = 0 ;
+    (this.currentFrameScores[1]) ? throw2Score = this.currentFrameScores[1] : throw2Score = 0 ;
+    (this.currentFrameScores[2]) ? throw3Score = this.currentFrameScores[2] : throw3Score = 0 ;
 
-    if (noOfThrows == 1){
-      this.results[this.currentFramesPlayed]={throw1: this.currentFrameScores[0],
-        throw2: 0,
-        throw3: 0,
-        bonus: 0}
-    }else if (noOfThrows == 2){
-      this.results[this.currentFramesPlayed]={
-        throw1: this.currentFrameScores[0],
-        throw2: this.currentFrameScores[1],
-        throw3: 0,
-        bonus: 0}
-    }else{
-      this.results[this.currentFramesPlayed]={
-        throw1: this.currentFrameScores[0],
-        throw2: this.currentFrameScores[1],
-        throw3: this.currentFrameScores[2],
-        bonus: 0}
-    }
+    this.results[this.currentFramesPlayed]={
+      throw1: throw1Score,
+      throw2: throw2Score,
+      throw3: throw3Score,
+      bonus: 0}
   }
 
   this.updateCurrentTotal = function(){
@@ -139,9 +117,7 @@ function Game(){
   }
 
   this.isBonus = function(){
-    //QUICK FIX TO PREVENT INDEX ERROR
-
-
+    //HAS SWITCH FOR FINAL THROW
     if(!this.throwsLeft<=2){
       throw1 = this.results[this.currentFramesPlayed].throw1
       if (throw1 == 10){
@@ -149,6 +125,7 @@ function Game(){
       }
       throw2 = this.results[this.currentFramesPlayed].throw2
       return (throw1+throw2==10)
+      
     }else{
       return false
     }
@@ -181,8 +158,6 @@ function Game(){
     return (this.throwsLeft % 2 == 0);
   }
 
-
-
   this.isStrikeRound= function(){
     return (this.score == 10);
   }
@@ -208,10 +183,6 @@ function Game(){
     this.totalScore = this.bonusHandler.totalScore;
   }
 
-
-  this.isBonusActive = function(){
-    return this.bonusHandler.isBonusActive();
-  }
 
   this.activateBonus=function(){
     if(this.isStrikeRound()){
